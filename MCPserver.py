@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-# This script connect the MCP AI agent to Kali Linux terminal and API Server.
-# It allows the AI agent to leverage tools and execute commands on a Kali Linux machine
-# by communicating with a corresponding server application (Kaliserver.py).
 
-# some of the code here was inspired from https://github.com/whit3rabbit0/project_astro , be sure to check them out
 
 import sys
 import os
@@ -14,7 +10,7 @@ from typing import Dict, Any, Optional
 import requests
 import json # Added for potential direct use, though requests.exceptions.JSONDecodeError is primary
 
-from fastmcp import FastMCP # FastMCP is likely a framework for creating AI agent tools
+from fastmcp import FastMCP 
 
 # Configure logging
 # Sets up basic logging to stdout with a specific format.
@@ -25,10 +21,10 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout) # Output logs to standard output
     ]
 )
-logger = logging.getLogger(__name__) # Get a logger instance for this module
+logger = logging.getLogger(__name__) 
 
 # Default configuration
-DEFAULT_KALI_SERVER = "http://<Kali IP>:5000" # Default URL for the Kali API server. Change to your linux IP if it's on a different machine.
+DEFAULT_KALI_SERVER = "http://192.168.1.170:5000" # Default URL for the Kali API server. Change to your linux IP if it's on a different machine.
 DEFAULT_REQUEST_TIMEOUT = 300  # 5 minutes default timeout for API requests to the Kali server.
 
 class KaliToolsClient:
@@ -148,14 +144,14 @@ def setup_mcp_server(kali_client: KaliToolsClient, log_level: str = "INFO") -> F
     Returns:
         A configured FastMCP instance with tools registered.
     """
-    mcp = FastMCP("kali-mcp", log_level=log_level) # Initialize the MCP server, "kali-mcp" is likely its name or ID.
+    mcp = FastMCP("kali-mcp", log_level=log_level)  
     logger.info(f"Setting up MCP server with log level {log_level} and registering tools.")
 
     # Define the "nmap_scan" tool
     @mcp.tool()
     def nmap_scan(target: str, scan_type: str = "-sV", ports: str = "", additional_args: str = "") -> Dict[str, Any]:
         
-        # docstrings are included as prompts to the LLM 
+        
         """
         MCP Tool: Execute an Nmap scan against a target using the Kali server.
         This function will be callable by the AI agent.
