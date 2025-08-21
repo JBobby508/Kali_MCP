@@ -85,7 +85,7 @@ python3 MCPClient.py --server http://YOUR_KALI_IP:5000
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `--server` | http://192.168.1.170:5000 | Kali API server URL |
+| `--server` | http://<IP>:5000 | Kali API server URL |
 | `--timeout` | 300 | Request timeout in seconds |
 | `--debug` | False | Enable debug logging |
 
